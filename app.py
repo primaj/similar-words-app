@@ -2,6 +2,7 @@ import streamlit as st
 import gensim.downloader as api
 from gensim.models import KeyedVectors
 
+
 @st.cache_resource
 def load_model(model_name='word2vec-google-news-300'):
     """
@@ -12,6 +13,7 @@ def load_model(model_name='word2vec-google-news-300'):
     """
     model = api.load(model_name)
     return model
+
 
 def find_similar_words(model, word, topn=10):
     """
@@ -29,6 +31,7 @@ def find_similar_words(model, word, topn=10):
         similar_words = []
     return similar_words
 
+
 def filter_similar_words(similar_words, input_word):
     """
     Filter out words with underscores and words that are the same as the input word (case insensitive).
@@ -40,6 +43,7 @@ def filter_similar_words(similar_words, input_word):
     input_word_lower = input_word.lower()
     filtered_words = [(word, score) for word, score in similar_words if '_' not in word and word.lower() != input_word_lower]
     return filtered_words
+
 
 # Streamlit app
 st.title("Word Similarity Finder")
